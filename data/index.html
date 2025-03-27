@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sophie's World - LLM Viewer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 2rem;
+      background-color: #f9f9f9;
+    }
+    .section-title {
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+    .paragraph-box {
+      white-space: pre-wrap;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      min-height: 150px;
+    }
+    .nav-buttons {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mb-4">📚 LLM Text Viewer: Sophie's World</h1>
+
+    <div class="row mb-3">
+      <div class="col-4">
+        <div class="section-title">Original</div>
+        <div id="original" class="paragraph-box"></div>
+      </div>
+      <div class="col-4">
+        <div class="section-title">Simplified</div>
+        <div id="simplified" class="paragraph-box"></div>
+      </div>
+      <div class="col-4">
+        <div class="section-title">Complexified</div>
+        <div id="complexified" class="paragraph-box"></div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between nav-buttons">
+      <button class="btn btn-secondary" onclick="prevParagraph()">⬅️ Previous</button>
+      <div>Paragraph <span id="paraNum">1</span></div>
+      <button class="btn btn-primary" onclick="nextParagraph()">Next ➡️</button>
+    </div>
+  </div>
+
+  <script>
+    let data = [];
+    let currentIndex = 0;
+
+    async function loadData() {
+      const res = await fetch("data/corpus.json");
+      data = await res.json();
+      showParagraph();
+    }
+
+    function showParagraph() {
+      const para = data[currentIndex];
+      document.getElementById("original").innerText = para.original;
+      document.getElementById("simplified").innerText = para.simplified || "(Not available)";
+      document.getElementById("complexified").innerText = para.complexified || "(Not available)";
+      document.getElementById("paraNum").innerText = para.paragraph;
+    }
+
+    function prevParagraph() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        showParagraph();
+      }
+    }
+
+    function nextParagraph() {
+      if (currentIndex < data.length - 1) {
+        currentIndex++;
+        showParagraph();
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
