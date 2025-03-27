@@ -31,27 +31,17 @@
   <div class="container">
     <h1 class="mb-4">📚 LLM Text Viewer: Sophie's World</h1>
 
-    <div class="row mb-3">
-      <div class="col-4">
-        <div class="section-title">Original</div>
-        <div id="original" class="paragraph-box"></div>
-      </div>
-      <div class="col-4">
-        <div class="section-title">Simplified</div>
-        <div id="simplified" class="paragraph-box"></div>
-      </div>
-      <div class="col-4">
-        <div class="section-title">Complexified</div>
-        <div id="complexified" class="paragraph-box"></div>
-      </div>
-    </div>
+    <div class="mb-3">
+  <div class="section-title">📘 Original</div>
+  <div id="original" class="paragraph-box mb-4"></div>
 
-    <div class="d-flex justify-content-between nav-buttons">
-      <button class="btn btn-secondary" onclick="prevParagraph()">⬅️ Previous</button>
-      <div>Paragraph <span id="paraNum">1</span></div>
-      <button class="btn btn-primary" onclick="nextParagraph()">Next ➡️</button>
-    </div>
-  </div>
+  <div class="section-title">🪄 Simplified</div>
+  <div id="simplified" class="paragraph-box mb-4"></div>
+
+  <div class="section-title">🧠 Complexified</div>
+  <div id="complexified" class="paragraph-box mb-4"></div>
+</div>
+
 
   <script>
     let data = [];
